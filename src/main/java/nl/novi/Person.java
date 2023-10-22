@@ -13,6 +13,7 @@ public class Person {
     private Person father;
     private List<Person> siblings;
     private List<Person> children;
+    private List<Person> grandchildren;
     private List<Pet> pets;
 
 
@@ -149,7 +150,23 @@ public class Person {
         me.setSiblings(siblings);
     }
 
-    public void getGrandchildren() {
-
+    public void setGrandchildren(List<Person> grandchildren) {
+        this.grandchildren = grandchildren;
     }
+    public List<Person> getGrandchildren(Person parent) {
+        List<Person> grandchildren = new ArrayList<>();
+        if (parent.getChildren() != null) {
+            for (Person children : parent.getChildren()) {
+                if (children.getChildren() != null) {
+                    for (Person child : children.getChildren()) {
+                        grandchildren.add(child);
+                    }
+                }
+            }
+        }
+        return grandchildren;
+    }
+
+
 }
+
