@@ -1,95 +1,101 @@
 package nl.novi;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PersonTest {
 
-    @org.junit.jupiter.api.Test
+    @BeforeEach
+    void setUp() {
+    }
+
+    @Test
     void getName() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setName() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getMiddleName() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setMiddleName() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getLastName() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setLastName() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getSex() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setSex() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getAge() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setAge() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getMother() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setMother() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getFather() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setFather() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getSiblings() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setSiblings() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getChildren() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setChildren() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void getPets() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void setPets() {
     }
 
-    @org.junit.jupiter.api.Test
-    void getGrandchildren() {
-    }
-
-    @org.junit.jupiter.api.Test
+    @Test
     void setGrandchildren() {
     }
 
+    @Test
+    void getGrandchildren() {
+    }
 }
