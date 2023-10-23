@@ -3,6 +3,9 @@ package nl.novi;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PersonTest {
@@ -16,17 +19,16 @@ class PersonTest {
 
     @BeforeEach
     void setUp() {
+        // Arrange (voor een aantal testen was het handig om hierboven vast wat persons te declareren, dat scheelt schrijfwerk. In andere gevallen vond ik het handiger en leesbaarder om bij de test zelf persons aan te maken.)
         me = new Person("Marjet", "Johanna", "Bosma", 'V', 42);
         father = new Person("Christiaan", "Frederik", "Bosma", 'M', 68);
         mother = new Person("Johanna", "Bonsma", 'V', 68);
         sister = new Person("Marianne", "Bosma", 'V', 40);
         daughter = new Person("Hannah", "Esther", "Daalder", 'V', 10);
-        cat = new Pet("Firsa", 17, "kat");
-
     }
 
     @Test
-    void getName() {
+    void getNameTest() {
         // Act
         String getName = me.getName();
         // Assert
@@ -34,14 +36,16 @@ class PersonTest {
     }
 
     @Test
-    void setName() {
+    void setNameTest() {
+        // Act
         me.setName("Johanna");
         String getName = me.getName();
+        // Assert
         assertEquals("Johanna", getName);
     }
 
     @Test
-    void getMiddleName() {
+    void getMiddleNameTest() {
         // Act
         String getMiddleName = me.getMiddleName();
         // Assert
@@ -49,14 +53,16 @@ class PersonTest {
     }
 
     @Test
-    void setMiddleName() {
+    void setMiddleNameTest() {
+        // Act
         me.setMiddleName("Marianne");
         String getMiddleName = me.getMiddleName();
+        // Assert
         assertEquals("Marianne", getMiddleName);
     }
 
     @Test
-    void getLastName() {
+    void getLastNameTest() {
         // Act
         String getLastName = me.getLastName();
         // Assert
@@ -64,77 +70,93 @@ class PersonTest {
     }
 
     @Test
-    void setLastName() {
+    void setLastNameTest() {
+        // Act
         me.setLastName("Daalder");
         String getLastName = me.getLastName();
+        // Assert
         assertEquals("Daalder", getLastName);
     }
 
     @Test
-    void getSex() {
+    void getSexTest() {
         char getSex = me.getSex();
         assertEquals('V', getSex);
     }
 
     @Test
-    void setSex() {
+    void setSexTest() {
         me.setSex('M');
         char getSex = me.getSex();
         assertEquals('M', getSex);
     }
 
     @Test
-    void getAge() {
+    void getAgeTest() {
         int getAge = me.getAge();
         assertEquals(42, getAge);
     }
 
     @Test
-    void setAge() {
+    void setAgeTest() {
         me.setAge(43);
         int getAge = me.getAge();
         assertEquals(43, getAge);
     }
 
     @Test
-    void getMother() {
-
+    void getMotherTest() {
+        // Arrange (personen staan ook al onder setup, maar ik gebruik hier even andere variabelenamen voor de helderheid en om verwarring te voorkomen.
+        Person person1 = new Person("Hannah", "Esther", "Daalder", 'V', 10);
+        Person person2 = new Person("Marjet", "Johanna", "Bosma", 'V', 42);
+        person1.setMother(person2); // De setterfunctie wordt meteen meegetest
+        // Act
+        Person mother = person1.getMother();
+        // Assert
+        assertEquals(person2, mother);
     }
 
     @Test
-    void setMother() {
+    void getFatherTest() {
+        // Arrange
+        Person person1 = new Person("Marianne", "Bosma", 'V', 40);
+        Person person2 = new Person("Christiaan", "Frederik", "Bosma", 'M', 68);
+        person1.setFather(person2); // De setterfunctie wordt meteen meegetest
+        // Act
+        Person father = person1.getFather();
+        // Assert
+        assertEquals(person2, father);
+    }
+
+
+    @Test
+    void getChildrenTest() {
+        // Arrange
+        Person person1 = new Person("Marianne", "Bosma", 'V', 40);
+        Person person2 = new Person("Eva", "Johanna", "Veldhuizen", 'V', 8);
+        Person person3 = new Person("Rosa", "Tooske", "Veldhuizen", 'V', 5);
+        List<Person> children = new ArrayList<>();
+        children.add(person2);
+        children.add(person3);
+        person1.setChildren(children);
+        // Act
+        List<Person> mySistersChildren = person1.getChildren();
+        // Assert
+        assertEquals(children, mySistersChildren);
     }
 
     @Test
-    void getFather() {
-    }
-
-    @Test
-    void setFather() {
-    }
-
-    @Test
-    void getSiblings() {
-    }
-
-    @Test
-    void setSiblings() {
-    }
-
-    @Test
-    void getChildren() {
-    }
-
-    @Test
-    void setChildren() {
-    }
-
-    @Test
-    void getPets() {
-    }
-
-    @Test
-    void setPets() {
+    void getSiblingsTest() {
+        // Arrange
+        Person person1 = new Person("Marjet", "Johanna", "Bosma", 'V', 42);
+        Person person2 = new Person("Marianne", "Bosma", 'V', 40);
+        List<Person> children = new ArrayList<>(); // zussen worden in
+        children.add(person2);
+        person1.setSiblings(children); // setterfunctie meegetest
+        // Act
+        List<Person> siblings = person1.getSiblings();
+        // Assert
+        assertEquals(children, siblings);
     }
 
     @Test
@@ -161,15 +183,31 @@ class PersonTest {
     }
 
     @Test
-    void addPet() {
+    void addSiblingTest() {
+        me.addSibling(me, sister);
+        assertEquals("Marianne", me.getSiblings().get(0).getName());
+        assertEquals(1, me.getSiblings().size());
+    }
+
+    @Test
+    void addPetTest1() { // Deze is geschreven tijdens de huiswerkklas
         me.addPet(me, cat);
         assertEquals("Firsa", me.getPets().get(0).getName());
     }
 
     @Test
-    void addSibling() {
-        me.addSibling(me, sister);
-        assertEquals("Marianne", me.getSiblings().get(0).getName());
-        assertEquals(1, me.getSiblings().size());
+    void addPetTest2() { // Ik wilde voor mijn eigen begrip ook nog even een andere manier prpberen die iets leesbaarder is
+        // Arrange (naast onderstaande pets gebruik ik person "me" zoals gedeclareerd bij ForEach bovenaan.
+        Pet pet1 = new Pet("Firsa", 17, "kat");
+        Pet pet2 = new Pet("Kees", 15, "kat"); // Deze kat is van mijn zus, maar nu even zogenaamd van mij, zodat ik de lijst kan vullen met meer dan 1 huisdier.
+        List<Pet> pets = new ArrayList<>();
+        pets.add(pet1);
+        pets.add(pet2);
+        // Act
+        me.addPet(me, pet1);
+        me.addPet(me, pet2);
+        // Assert
+        assertEquals(pets, me.getPets()); // Getterfunctie wordt ook meegetest
     }
+
 }

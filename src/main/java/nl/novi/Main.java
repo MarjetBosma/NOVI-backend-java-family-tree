@@ -3,7 +3,7 @@ package nl.novi;
 public class Main {
     public static void main(String[] args) {
 
-        // Mijn ouders zijn beiden al overleden, dus ik heb maar de leeftijd ingevuld die ze nu zouden hebben, maar in dit geval had een geboortejaar wellicht beter gewerkt, in stambomen is het natuurlijk heel vaak het geval dat mensen al niet meer leven.
+        // Mijn ouders zijn beiden al overleden, dus ik heb maar de leeftijd ingevuld die ze nu zouden hebben, maar in dit geval had een geboortejaar wellicht beter gewerkt, want in stambomen is het vaak het geval dat mensen al niet meer leven.
 
         Person father = new Person("Christiaan", "Frederik", "Bosma", 'M', 68);
         Person mother = new Person("Johanna", "Bonsma", 'V', 68);
