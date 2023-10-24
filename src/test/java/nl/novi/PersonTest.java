@@ -132,13 +132,10 @@ class PersonTest {
     @Test
     void getChildrenTest() {
         // Arrange
-        Person person1 = new Person("Marianne", "Bosma", 'V', 40);
-        Person person2 = new Person("Eva", "Johanna", "Veldhuizen", 'V', 8);
-        Person person3 = new Person("Rosa", "Tooske", "Veldhuizen", 'V', 5);
+        Person person1 = new Person("Marjet", "Johanna","Bosma", 'V', 42);
+        Person person2 = new Person("Hannah", "Esther", "Daalder", 'V', 10);
         List<Person> children = new ArrayList<>();
         children.add(person2);
-        children.add(person3);
-        person1.setChildren(children);
         // Act
         List<Person> mySistersChildren = person1.getChildren();
         // Assert
@@ -160,22 +157,7 @@ class PersonTest {
     }
 
     @Test
-    void setGrandchildren() {
-    }
-
-    @Test
-    void getGrandchildren() {
-    }
-
-    @Test
-    void addParents() {
-        me.addParents(father, mother, me);
-        assertEquals(father, me.getFather());
-        assertEquals("Johanna", me.getMother().getName());
-    }
-
-    @Test
-    void addChild() {
+    void addChildTest() {
         father.addChild(father, me);
         father.addChild(father, sister);
         assertEquals("Marjet", father.getChildren().get(0).getName()); // get(0): eerste index van de lijst
@@ -188,6 +170,62 @@ class PersonTest {
         assertEquals("Marianne", me.getSiblings().get(0).getName());
         assertEquals(1, me.getSiblings().size());
     }
+
+    // Deze lukt me niet... De print statements heb ik gebruikt om de output te zien, maar ik kom niet achter het probleem.
+    @Test
+    void testSetGrandchildren() {
+        // Arrange
+        Person grandparent = new Person("Johanna", "Bonsma", 'V', 68); // Mijn moeder
+        Person parent = new Person("Marianne", "Bosma", 'V', 40); // Mijn zus, gekozen omdat zij twee kinderen heeft, zodat je de lijst kan vullen met meer dan 1 item.
+        Person grandchild1 = new Person("Eva", "Johanna", "Veldhuizen", 'V', 8); // Oudste dochter van mijn zus
+        Person grandchild2 = new Person("Rosa", "Tooske", "Veldhuizen", 'V', 5); // Jongste dochter van mijn zus
+
+        List<Person> grandchildren = new ArrayList<>();
+        grandchildren.add(grandchild1);
+        grandchildren.add(grandchild2);
+        grandparent.setGrandchildren(grandchildren);
+        // Act
+        List<Person> actualGrandchildren = grandparent.getGrandchildren(parent);
+
+        System.out.println("Expected Grandchildren: " + grandchildren);
+        System.out.println("Actual Grandchildren: " + actualGrandchildren);
+        // Assert
+        assertEquals(grandchildren, actualGrandchildren);
+    }
+
+    // Idem als de vorige
+    @Test
+    void getGrandchildrenTest() {
+        // Arrange
+        Person grandparent = new Person("Johanna", "Bonsma", 'V', 68); // Mijn moeder
+        Person parent = new Person("Marianne", "Bosma", 'V', 40); // Mijn zus, gekozen omdat zij twee kinderen heeft, zodat je de lijst kan vullen met meer dan 1 item.
+        Person child1 = new Person("Eva", "Johanna", "Veldhuizen", 'V', 8); // Oudste dochter van mijn zus
+        Person child2 = new Person("Rosa", "Tooske", "Veldhuizen", 'V', 5); // Jongste dochter van mijn zus
+
+        grandparent.getChildren().add(parent); // Verbindt mijn moeder en zus
+        parent.getChildren().add(child1); // Verbindt mijn zus en haar kinderen
+        parent.getChildren().add(child2);
+        List<Person> grandchildren = grandparent.getGrandchildren(parent);
+        // Act
+        List<Person> expectedGrandchildren = new ArrayList<>();
+        expectedGrandchildren.add(child1);
+        expectedGrandchildren.add(child2);
+
+        System.out.println("Expected Grandchildren: " + expectedGrandchildren);
+        System.out.println("Actual Grandchildren: " + grandchildren);
+        // Assert
+        assertEquals(expectedGrandchildren, grandchildren);
+    }
+
+
+    @Test
+    void addParents() {
+        me.addParents(father, mother, me);
+        assertEquals(father, me.getFather());
+        assertEquals("Johanna", me.getMother().getName());
+    }
+
+
 
     @Test
     void addPetTest1() { // Deze is geschreven tijdens de huiswerkklas

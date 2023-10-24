@@ -31,8 +31,7 @@ public class Person {
         this.age = age;
     }
     
-    public String getName() {
-        return name;
+    public String getName() { return name;
     }
 
     public void setName(String name) {
@@ -138,15 +137,17 @@ public class Person {
         person.setPets(pets);
     }
 
-    public void addSibling(Person me, Person sibling) {
+    public void addSibling(Person person, Person sibling) {
         List<Person> siblings = new ArrayList<>();
-        if (me.getSiblings() != null) {
-            for (Person person : me.getSiblings()) {
+        if (person.getSiblings() != null) {
+            for (Person p : person.getSiblings()) {
                 siblings.add(person);
             }
         } siblings.add(sibling);
-        me.setSiblings(siblings);
+        person.setSiblings(siblings);
     }
+
+    // Onderstaande methode is gedaan tijdens de huiswerkklas, en toen kon ik het volgen, maar teruglezend vind ik het nog heel moeilijk te doorgronden. Dat is waarschijnlijk ook de reden waarom ik de bijbehorende testen ook niet goed krijg...
 
     public void setGrandchildren(List<Person> grandchildren) {
         this.grandchildren = grandchildren;
@@ -166,3 +167,4 @@ public class Person {
     }
 }
 
+// Er zijn overigens in totaal drie kleinkinderen, 1 van mij en 2 van mijn zus. Maar hoe je dat nu hierin zou moeten verwerken?
