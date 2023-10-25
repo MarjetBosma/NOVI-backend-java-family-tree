@@ -15,6 +15,7 @@ class PersonTest {
     Person mother;
     Person sister;
     Person daughter;
+    Person wife;
     Pet cat;
 
     @BeforeEach
@@ -25,6 +26,7 @@ class PersonTest {
         mother = new Person("Johanna", "Bonsma", 'V', 68);
         sister = new Person("Marianne", "Bosma", 'V', 40);
         daughter = new Person("Hannah", "Esther", "Daalder", 'V', 10);
+        wife = new Person("Rieneke", "Esther", "Daalder", 'V', 47);
     }
 
     @Test
@@ -115,6 +117,7 @@ class PersonTest {
         // Assert
         assertEquals(person2, mother);
     }
+    // Mijn dochter heeft 2 moeders en geen (bekende) vader, maar dat kun je nu niet vastleggen volgens mij. Wellicht leuk om nog eens uit te zoeken hoe dat dan zou moeten, maar ik vond voor nu deze opdracht al uitdagend genoeg...
 
     @Test
     void getFatherTest() {
@@ -171,29 +174,21 @@ class PersonTest {
         assertEquals(1, me.getSiblings().size());
     }
 
-    // Deze lukt me niet... De print statements heb ik gebruikt om de output te zien, maar ik kom niet achter het probleem.
     @Test
-    void testSetGrandchildren() {
-        // Arrange
-        Person grandparent = new Person("Johanna", "Bonsma", 'V', 68); // Mijn moeder
-        Person parent = new Person("Marianne", "Bosma", 'V', 40); // Mijn zus, gekozen omdat zij twee kinderen heeft, zodat je de lijst kan vullen met meer dan 1 item.
-        Person grandchild1 = new Person("Eva", "Johanna", "Veldhuizen", 'V', 8); // Oudste dochter van mijn zus
-        Person grandchild2 = new Person("Rosa", "Tooske", "Veldhuizen", 'V', 5); // Jongste dochter van mijn zus
-
-        List<Person> grandchildren = new ArrayList<>();
-        grandchildren.add(grandchild1);
-        grandchildren.add(grandchild2);
-        grandparent.setGrandchildren(grandchildren);
-        // Act
-        List<Person> actualGrandchildren = grandparent.getGrandchildren(parent);
-
-        System.out.println("Expected Grandchildren: " + grandchildren);
-        System.out.println("Actual Grandchildren: " + actualGrandchildren);
-        // Assert
-        assertEquals(grandchildren, actualGrandchildren);
+    void addParents() {
+        me.addParents(father, mother, me);
+        assertEquals(father, me.getFather()); // manier 1
+        assertEquals("Johanna", me.getMother().getName()); // manier 2
     }
 
-    // Idem als de vorige
+    @Test
+    void addPartnerTest() {
+        me.addPartner(me, wife);
+        assertEquals(me.getPartner(), wife);
+        assertEquals(wife.getPartner(), me);
+    }
+
+    // Deze lukt me niet... Ergens mis ik iets, maar ik kom er maar niet achter.
     @Test
     void getGrandchildrenTest() {
         // Arrange
@@ -210,22 +205,9 @@ class PersonTest {
         List<Person> expectedGrandchildren = new ArrayList<>();
         expectedGrandchildren.add(child1);
         expectedGrandchildren.add(child2);
-
-        System.out.println("Expected Grandchildren: " + expectedGrandchildren);
-        System.out.println("Actual Grandchildren: " + grandchildren);
         // Assert
-        assertEquals(expectedGrandchildren, grandchildren);
+        assertEquals(expectedGrandchildren, grandchildren); // grandchildren geeft een lege array
     }
-
-
-    @Test
-    void addParents() {
-        me.addParents(father, mother, me);
-        assertEquals(father, me.getFather());
-        assertEquals("Johanna", me.getMother().getName());
-    }
-
-
 
     @Test
     void addPetTest1() { // Deze is geschreven tijdens de huiswerkklas
@@ -234,7 +216,7 @@ class PersonTest {
     }
 
     @Test
-    void addPetTest2() { // Ik wilde voor mijn eigen begrip ook nog even een andere manier prpberen die iets leesbaarder is
+    void addPetTest2() { // Ik wilde voor mijn eigen begrip ook nog even een andere manier proberen die iets leesbaarder is
         // Arrange (naast onderstaande pets gebruik ik person "me" zoals gedeclareerd bij ForEach bovenaan.
         Pet pet1 = new Pet("Firsa", 17, "kat");
         Pet pet2 = new Pet("Kees", 15, "kat"); // Deze kat is van mijn zus, maar nu even zogenaamd van mij, zodat ik de lijst kan vullen met meer dan 1 huisdier.

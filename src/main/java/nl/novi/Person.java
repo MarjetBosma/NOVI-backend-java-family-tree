@@ -11,6 +11,7 @@ public class Person {
     private int age;
     private Person mother;
     private Person father;
+    private Person partner;
     private List<Person> siblings;
     private List<Person> children;
     private List<Person> grandchildren;
@@ -102,6 +103,10 @@ public class Person {
         this.children = children;
     }
 
+    public Person getPartner() { return partner; }
+
+    public void setPartner(Person partner) { this.partner = partner;}
+
     public List<Pet> getPets() {
         return pets;
     }
@@ -147,6 +152,14 @@ public class Person {
         person.setSiblings(siblings);
     }
 
+    // Bonusopdracht 3
+    public void addPartner(Person person, Person partner){
+        if(person.getPartner() == null && partner.getPartner() == null){ // als er nog geen partner is
+            person.setPartner(partner); // koppelt partner en person wederzijds
+            partner.setPartner(person);
+        }
+    }
+
     // Onderstaande methode is gedaan tijdens de huiswerkklas, en toen kon ik het volgen, maar teruglezend vind ik het nog heel moeilijk te doorgronden. Dat is waarschijnlijk ook de reden waarom ik de bijbehorende testen ook niet goed krijg...
 
     public void setGrandchildren(List<Person> grandchildren) {
@@ -165,6 +178,5 @@ public class Person {
         }
         return grandchildren;
     }
+    // Er zijn overigens in totaal drie kleinkinderen, 1 van mij en 2 van mijn zus. Maar hoe je dat nu hierin zou moeten verwerken?
 }
-
-// Er zijn overigens in totaal drie kleinkinderen, 1 van mij en 2 van mijn zus. Maar hoe je dat nu hierin zou moeten verwerken?
