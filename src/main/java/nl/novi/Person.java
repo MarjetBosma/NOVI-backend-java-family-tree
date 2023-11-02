@@ -162,17 +162,18 @@ public class Person {
 
     // Onderstaande methode is gedaan tijdens de huiswerkklas, en toen kon ik het volgen, maar teruglezend vind ik het nog heel moeilijk te doorgronden. Dat is waarschijnlijk ook de reden waarom ik de bijbehorende testen ook niet goed krijg...
 
-    public void setGrandchildren(List<Person> grandchildren) {
-        this.grandchildren = grandchildren;
-    }
-    public List<Person> getGrandchildren(Person parent) {
+//    public void setGrandchildren(List<Person> grandchildren) {
+//        this.grandchildren = grandchildren;
+//    }
+    public List<Person> getGrandchildren(Person grandparent) {
         List<Person> grandchildren = new ArrayList<>();
-        if (parent.getChildren() != null) {
-            for (Person children : parent.getChildren()) {
-                if (children.getChildren() != null) {
-                    for (Person child : children.getChildren()) {
-                        grandchildren.add(child);
-                    }
+        if (grandparent.getChildren() != null) {
+            for (Person child : grandparent.getChildren()) {
+                if (child.getChildren() != null) {
+//                    for (Person grandchild : child.getChildren()) {
+//                        grandchildren.add(grandchild);
+//                    }
+                    grandchildren.addAll(child.getChildren());
                 }
             }
         }

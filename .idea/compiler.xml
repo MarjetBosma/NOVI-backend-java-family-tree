@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="FamilyTree" />
+        <module name="JOSFamilyTree" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="FamilyTree" target="19" />
+      <module name="JOSFamilyTree" target="19" />
     </bytecodeTargetLevel>
   </component>
 </project>

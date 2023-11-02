@@ -197,16 +197,19 @@ class PersonTest {
         Person child1 = new Person("Eva", "Johanna", "Veldhuizen", 'V', 8); // Oudste dochter van mijn zus
         Person child2 = new Person("Rosa", "Tooske", "Veldhuizen", 'V', 5); // Jongste dochter van mijn zus
 
-        grandparent.getChildren().add(parent); // Verbindt mijn moeder en zus
-        parent.getChildren().add(child1); // Verbindt mijn zus en haar kinderen
-        parent.getChildren().add(child2);
-        List<Person> grandchildren = grandparent.getGrandchildren(parent);
+
+        parent.addChild(parent, child1);
+        parent.addChild(parent, child2);
+        grandparent.addChild(grandparent, parent);
+
+        List<Person> grandchildren = grandparent.getGrandchildren(grandparent);
+
         // Act
         List<Person> expectedGrandchildren = new ArrayList<>();
         expectedGrandchildren.add(child1);
         expectedGrandchildren.add(child2);
         // Assert
-        assertEquals(expectedGrandchildren, grandchildren); // grandchildren geeft een lege array
+        assertEquals(expectedGrandchildren, grandchildren);
     }
 
     @Test

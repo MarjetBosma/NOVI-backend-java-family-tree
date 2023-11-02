@@ -36,5 +36,6 @@ public class Pet {
     public void setSpecies(String species) {
         this.species = species;
     }
+
 }
 
